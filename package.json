@@ -1,0 +1,16 @@
+{
+  "name": "burke-blog-auth",
+  "version": "1.0.0",
+  "description": "Serverless OAuth2",
+  "author": "Chris Burke",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "dependencies": {
+    "randomstring": "^1.2.1",
+    "simple-oauth2": "^4.3.0"
+  }
+}

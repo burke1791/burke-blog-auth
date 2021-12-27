@@ -1,0 +1,34 @@
+name: Prod
+
+on:
+  push:
+    branches: master
+
+jobs:
+  deploy:
+    name: Deploy burke-blog auth service
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: use nodejs
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+      - name: install
+        run: |
+          npm install -g serverless
+          npm install
+      - name: deploy
+        run: serverless deploy -s $STAGE_NAME
+
+env:
+  STAGE_NAME: prod
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  GIT_HOSTNAME: ${{ secrets.GIT_HOSTNAME }}
+  OAUTH_TOKEN_PATH: ${{ secrets.OAUTH_TOKEN_PATH }}
+  OAUTH_AUTHORIZE_PATH: ${{ secrets.OAUTH_AUTHORIZE_PATH }}
+  OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
+  OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
+  OAUTH_SCOPES: ${{ secrets.OAUTH_SCOPES }}

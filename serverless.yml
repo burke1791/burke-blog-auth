@@ -1,0 +1,91 @@
+service: serverless-oauth2
+
+plugins:
+  - serverless-plugin-optimize
+
+package:
+  individually: true
+
+custom:
+  stage: dev
+  region: us-east-1
+  kms_key:
+    us-east-1:
+      dev: ${env:KMS_DEV}
+      prod: ${env:KMS_PROD}
+
+provider:
+  name: aws
+  retion: ${opt:region, self:custom.region}
+  runtime: nodejs16.x
+  stage: ${opt:stage, self:custom.stage}
+  environment:
+    GIT_HOSTNAME: ${env:GIT_HOSTNAME}
+    OAUTH_TOKEN_PATH: ${env:OAUTH_TOKEN_PATH}
+    OAUTH_AUTHORIZE_PATH: ${env:OAUTH_AUTHORIZE_PATH}
+    OAUTH_CLIENT_ID: ${env:OAUTH_CLIENT_ID}
+    OAUTH_CLIENT_SECRET: ${env:OAUTH_CLIENT_SECRET}
+    REDIRECT_URL:
+      Fn::Join:
+        - ''
+        - - https://
+          - Ref: ApiGatewayRestApi
+          - .execute-api.
+          - Ref: AWS::Region
+          - .amazonaws.com/${self:provider.stage}/callback
+    OAUTH_SCOPES: ${env:OAUTH_SCOPES}
+    TZ: 'utc'
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - ssm:DescribeParameters
+        - ssm:GetParameters
+      Resource: arn:aws:ssm:${self:provider.region}:*:parameter/burkcules/oauth/${self:provider.stage}/*
+    - Effect: Allow
+      Action:
+        - kms:Decrypt
+      Resource: arn:aws:kms:${self:provider.region}:*:key/${self:custom.kms_key.${self:provider.region}.${self:provider.stage}}
+
+functions:
+  auth:
+    handler: auth.auth
+    memorySize: 128
+    timeout: 10
+    events:
+      - http:
+        path: /auth
+        method: get
+        cors: true
+  
+  callback:
+    handler: auth.callback
+    memorySize: 128
+    timeout: 10
+    events:
+      - http:
+        path: /callback
+        method: get
+        cors: true
+  
+  success:
+    handler: auth.success
+    memorySize: 128
+    timeout: 10
+    events:
+      - http:
+        path: /success
+        method: get
+        cors: true
+  
+  default:
+    handler: auth.default
+    memorySize: 128
+    timeout: 10
+    events:
+      - http:
+        path: /
+        method: get
+        cors: true
+
+resources:
+  - ${file(./resources/parameters.yml)}
