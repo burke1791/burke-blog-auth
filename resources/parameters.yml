@@ -1,6 +1,6 @@
 Resources:
   GitHostname:
-    Type: AWS:SSM:Parameter
+    Type: AWS::SSM::Parameter
     Properties:
       Name: /burkcules/oauth/${self:provider.stage}/GIT_HOSTNAME
       Description: Hostname for the authentication provider
@@ -9,7 +9,7 @@ Resources:
       Value: ${env:GIT_HOSTNAME}
 
   OauthTokenPath:
-    Type: AWS:SSM:Parameter
+    Type: AWS::SSM::Parameter
     Properties:
       Name: /burkcules/oauth/${self:provider.stage}/OAUTH_TOKEN_PATH
       Description: Token Api Uri path
@@ -18,7 +18,7 @@ Resources:
       Value: ${env:OAUTH_TOKEN_PATH}
 
   OauthAuthorizePath:
-    Type: AWS:SSM:Parameter
+    Type: AWS::SSM::Parameter
     Properties:
       Name: /burkcules/oauth/${self:provider.stage}/OAUTH_AUTHORIZE_PATH
       Description: Authorize Api Uri path
@@ -27,7 +27,7 @@ Resources:
       Value: ${env:OAUTH_AUTHORIZE_PATH}
 
   OauthClientId:
-    Type: AWS:SSM:Parameter
+    Type: AWS::SSM::Parameter
     Properties:
       Name: /burkcules/oauth/${self:provider.stage}/OAUTH_CLIENT_ID
       Description: Github OAuth Client Id
@@ -36,7 +36,7 @@ Resources:
       Value: ${env:OAUTH_CLIENT_ID}
 
   OauthClientSecret:
-    Type: AWS:SSM:Parameter
+    Type: AWS::SSM::Parameter
     Properties:
       Name: /burkcules/oauth/${self:provider.stage}/OAUTH_CLIENT_SECRET
       Description: Github OAuth Client Secret
@@ -45,7 +45,7 @@ Resources:
       Value: ${env:OAUTH_CLIENT_SECRET}
 
   RedirectUrl:
-    Type: AWS:SSM:Parameter
+    Type: AWS::SSM::Parameter
     Properties:
       Name: /burkcules/oauth/${self:provider.stage}/REDIRECT_URL
       Description: Callback Url in API Gateway
@@ -61,7 +61,7 @@ Resources:
             - .amazonaws.com/${self:provider.stage}/callback
 
   OauthScopes:
-    Type: AWS:SSM:Parameter
+    Type: AWS::SSM::Parameter
     Properties:
       Name: /burkcules/oauth/${self:provider.stage}/OAUTH_SCOPES
       Description: OAuth Scopes
