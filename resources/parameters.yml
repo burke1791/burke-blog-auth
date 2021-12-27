@@ -51,7 +51,14 @@ Resources:
       Description: Callback Url in API Gateway
       Tier: Standard
       Type: String
-      Value: ${env:REDIRECT_URL}
+      Value: 
+        Fn::Join:
+          - ''
+          - - https://
+            - Ref: ApiGatewayRestApi
+            - .execute-api.
+            - Ref: AWS::Region
+            - .amazonaws.com/${self:provider.stage}/callback
 
   OauthScopes:
     Type: AWS:SSM:Parameter
