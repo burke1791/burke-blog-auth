@@ -44,21 +44,14 @@ Resources:
       Type: String
       Value: ${env:OAUTH_CLIENT_SECRET}
 
-  # RedirectUrl:
-  #   Type: AWS::SSM::Parameter
-  #   Properties:
-  #     Name: /burkcules/oauth/${self:provider.stage}/REDIRECT_URL
-  #     Description: Callback Url in API Gateway
-  #     Tier: Standard
-  #     Type: String
-  #     Value: 
-  #       Fn::Join:
-  #         - ''
-  #         - - https://
-  #           - Ref: ApiGatewayRestApi
-  #           - .execute-api.
-  #           - Ref: AWS::Region
-  #           - .amazonaws.com/${self:provider.stage}/callback
+  RedirectUrl:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /burkcules/oauth/${self:provider.stage}/REDIRECT_URL
+      Description: Callback Url in API Gateway
+      Tier: Standard
+      Type: String
+      Value: https://qx9zm191hi.execute-api.us-east-1.amazonaws.com/prod
 
   OauthScopes:
     Type: AWS::SSM::Parameter
