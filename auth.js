@@ -32,6 +32,8 @@ function getScript(mess, content) {
 
 module.exports.auth = (e, ctx, cb) => secrets.init()
   .then(() => {
+    console.log(process.env);
+    console.log(process.env.GIT_HOSTNAME);
     const oauth2 = simpleOauthModule.create({
       client: {
         id: secrets.OAUTH_CLIENT_ID,
