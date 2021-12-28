@@ -80,13 +80,15 @@ module.exports.callback = (e, ctx, cb) => {
     const token = oauth2.createToken(result);
     console.log(token);
     console.log(token.token);
+    console.log(token.token.token);
+    console.log(token.token.token.access_token);
     cb(null, {
       statusCode: 200,
       headers: {
         'Content-Type': 'text/html',
       },
       body: getScript('success', {
-        token: token.token.access_token,
+        token: token.token.token.access_token,
         provider: 'github',
       })
     });
