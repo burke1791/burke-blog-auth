@@ -99,11 +99,9 @@ module.exports.callback = (e, ctx, cb) => {
   });
 };
 
-module.exports.success = (e, ctx, cb) => cb(
-  null,
-  {
+module.exports.success = (e, ctx, cb) => cb(null, {
     statusCode: 204,
-    body: 'success',
+    body: '',
   },
 );
 
