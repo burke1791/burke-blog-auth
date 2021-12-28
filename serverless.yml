@@ -53,9 +53,9 @@ functions:
     timeout: 10
     events:
       - http:
-        path: /auth
-        method: get
-        cors: true
+          path: /auth
+          method: get
+          cors: true
   
   callback:
     handler: auth.callback
@@ -63,9 +63,9 @@ functions:
     timeout: 10
     events:
       - http:
-        path: /callback
-        method: get
-        cors: true
+          path: /callback
+          method: get
+          cors: true
   
   success:
     handler: auth.success
@@ -73,9 +73,9 @@ functions:
     timeout: 10
     events:
       - http:
-        path: /success
-        method: get
-        cors: true
+          path: /success
+          method: get
+          cors: true
   
   default:
     handler: auth.default
@@ -83,9 +83,9 @@ functions:
     timeout: 10
     events:
       - http:
-        path: /
-        method: get
-        cors: true
+          path: /
+          method: get
+          cors: true
 
 resources:
   - ${file(./resources/parameters.yml)}
