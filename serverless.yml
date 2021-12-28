@@ -16,7 +16,7 @@ custom:
 
 provider:
   name: aws
-  retion: ${opt:region, self:custom.region}
+  region: ${opt:region, self:custom.region}
   runtime: nodejs14.x
   stage: ${opt:stage, self:custom.stage}
   environment:
