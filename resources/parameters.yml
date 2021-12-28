@@ -51,7 +51,7 @@ Resources:
       Description: Callback Url in API Gateway
       Tier: Standard
       Type: String
-      Value: https://qx9zm191hi.execute-api.us-east-1.amazonaws.com/prod
+      Value: ${env:REDIRECT_URL}
 
   OauthScopes:
     Type: AWS::SSM::Parameter
