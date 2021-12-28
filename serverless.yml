@@ -34,7 +34,7 @@ provider:
       Action:
         - ssm:DescribeParameters
         - ssm:GetParameters
-      Resource: arn:aws:ssm:${self:provider.region}:*:parameter/burkcules/oauth/${self:provider.stage}/*
+      Resource: arn:aws:ssm:${self:provider.region}:*:*
     - Effect: Allow
       Action:
         - kms:Decrypt
