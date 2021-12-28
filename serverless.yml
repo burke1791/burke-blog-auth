@@ -19,6 +19,7 @@ provider:
   region: ${opt:region, self:custom.region}
   runtime: nodejs14.x
   stage: ${opt:stage, self:custom.stage}
+  lambdaHashingVersion: 20201221
   environment:
     GIT_HOSTNAME: ${env:GIT_HOSTNAME}
     OAUTH_TOKEN_PATH: ${env:OAUTH_TOKEN_PATH}
