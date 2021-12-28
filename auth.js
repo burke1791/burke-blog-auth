@@ -78,6 +78,8 @@ module.exports.callback = (e, ctx, cb) => {
     return oauth2.getToken(options);
   }).then((result) => {
     const token = oauth2.createToken(result);
+    console.log(token);
+    console.log(token.token);
     cb(null, {
       statusCode: 200,
       headers: {
