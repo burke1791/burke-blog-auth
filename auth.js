@@ -111,7 +111,7 @@ module.exports.success = (e, ctx, cb) => cb(
   null,
   {
     statusCode: 204,
-    body: '',
+    body: 'success',
   },
 );
 
