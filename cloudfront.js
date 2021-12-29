@@ -17,6 +17,8 @@ module.exports.invalidate = (e, ctx, cb) => {
   };
 
   cloudfront.createInvalidation(params, (err, data) => {
+    console.log(err);
+    console.log(data);
     cb(null, { statusCode: 200 });
   });
 };
