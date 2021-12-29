@@ -28,6 +28,7 @@ provider:
     OAUTH_CLIENT_SECRET: ${env:OAUTH_CLIENT_SECRET}
     REDIRECT_URL: ${env:REDIRECT_URL}
     OAUTH_SCOPES: ${env:OAUTH_SCOPES}
+    CLOUDFRONT_ID: ${env:CLOUDFRONT_ID}
     TZ: 'utc'
   iamRoleStatements:
     - Effect: Allow
@@ -39,6 +40,12 @@ provider:
       Action:
         - kms:Decrypt
       Resource: arn:aws:kms:${self:provider.region}:*:key/${self:custom.kms_key.${self:provider.region}.${self:provider.stage}}
+    - Effect: Allow
+      Action:
+        - cloudfront:CreateInvalidation
+      Resource: arn:aws:cloudfront::329156245350:distribution/${env:CLOUDFRONT_ID}
+  apiKeys:
+    - ClientAPIKey
 
 functions:
   auth:
@@ -80,6 +87,16 @@ functions:
           path: /
           method: get
           cors: true
+
+  invalidateCloudFront:
+    handler: cloudfront.invalidate
+    memorySize: 128
+    timeout: 30
+    events:
+      - http:
+          path: /invalidate
+          method: post
+          private: true
 
 resources:
   - ${file(./resources/parameters.yml)}

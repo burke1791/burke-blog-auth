@@ -35,3 +35,4 @@ env:
   OAUTH_SCOPES: ${{ secrets.OAUTH_SCOPES }}
   KMS_DEV: ${{ secrets.KMS_DEV }}
   KMS_PROD: ${{ secrets.KMS_PROD }}
+  CLOUDFRONT_ID: ${{ secrets.CLOUDFRONT_ID}}
